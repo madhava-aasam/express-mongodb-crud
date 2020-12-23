@@ -8,14 +8,17 @@ router.post("/login", function (req, res, next) {
   res.send({ msg: "login not implemented" });
 });
 
-router.post("/:id?", async function (req, res, next) {
+router.post("/", async function (req, res, next) {
   try {
     const user = new User({
       first_name: req.body.first_name,
       last_name: req.body.last_name,
-      ssn: req.body.ssn,
+      phone: req.body.phone,
       address: req.body.address,
+      ssn: req.body.ssn,      
     });
+
+    // console.log('user --------------', user);
 
     const result = await user.save();
     
@@ -30,7 +33,7 @@ router.post("/:id?", async function (req, res, next) {
   }
 });
 
-router.get("/", async function (req, res, next) {
+router.get("/:id?", async function (req, res, next) {
   try {
     const users = await User.find();
 
